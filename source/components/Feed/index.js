@@ -1,5 +1,5 @@
 // Core
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import moment from 'moment';
 
 // Components
@@ -10,7 +10,7 @@ import Spinner from '../Spinner';
 
 // Instruments
 import Styles from './styles.m.css';
-import { getUniqueID, delay } from '../../instruments';
+import {getUniqueID, delay} from '../../instruments';
 
 export default class Feed extends Component {
     constructor() {
@@ -24,8 +24,8 @@ export default class Feed extends Component {
     state = {
         isSpinning: false,
         posts:      [
-            { id: '123', comment: 'Hi there!', created: 1543185420, likes: [] },
-            { id: '234', comment: 'Hello!', created: 1543185516, likes: [] },
+            {id: '123', comment: 'Hi there!', created: 1543185420, likes: []},
+            {id: '234', comment: 'Hello!', created: 1543185516, likes: []},
         ],
     }
 
@@ -52,16 +52,12 @@ export default class Feed extends Component {
         }));
     }
 
-    async _removePost (id) {
+    async _removePost(id) {
         this._setPostsFetchingState(true);
 
         await delay(1200);
 
-        const newPosts = this.state.posts.map((post) => {
-            if (post.id !== id) {
-                return { ...post };
-            }
-        });
+        const newPosts = this.state.posts.filter((item) => item.id !== id);
         this.setState({
             posts:      newPosts,
             isSpinning: false,
@@ -69,7 +65,8 @@ export default class Feed extends Component {
     }
 
     async _likePost(id) {
-        const { currentUserFirstName, currentUserLastName } = this.props;
+        console.log(this.props);
+        const {currentUserFirstName, currentUserLastName} = this.props;
         this._setPostsFetchingState(true);
 
         await delay(1200);
@@ -97,7 +94,7 @@ export default class Feed extends Component {
     }
 
     render() {
-        const { posts, isSpinning } = this.state;
+        const {posts, isSpinning} = this.state;
 
         const postsJSX = posts.map((post) => {
             return (
@@ -112,7 +109,7 @@ export default class Feed extends Component {
 
         return (
             <section className = { Styles.feed }>
-                <Spinner isSpinning = { isSpinning } />
+                <Spinner isSpinning = { isSpinning }/>
                 <StatusBar/>
                 <Composer _createPost = { this._createPost }/>
                 {postsJSX}

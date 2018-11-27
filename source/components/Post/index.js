@@ -20,8 +20,12 @@ export default class Post extends Component {
         likes:       array.isRequired,
     }
 
-    _removePost () {
-        console.log(this.props);
+    constructor () {
+        super();
+        this._removePostHandler = this._removePostHandler.bind(this);
+    }
+
+    _removePostHandler () {
         const { _removePost, id } = this.props;
 
         return _removePost(id);
@@ -36,7 +40,7 @@ export default class Post extends Component {
                     <section className = { Styles.post }>
                         <span
                             className = { Styles.cross }
-                            onClick = { this._removePost }
+                            onClick = { this._removePostHandler }
                         />
                         <img src = { context.avatar }/>
                         <a>{`${context.currentUserFirstName} ${context.currentUserLastName}`}</a>
