@@ -61,11 +61,13 @@ export default class Feed extends Component {
 
     _likePost = async (id) => {
         const {currentUserFirstName, currentUserLastName} = this.props;
+        const {posts} = this.state;
+
         this._setPostsFetchingState(true);
 
         await delay(1200);
 
-        const newPosts = this.state.posts.map((post) => {
+        const newPosts = posts.map((post) => {
             if (post.id === id) {
                 return {
                     ...post,
