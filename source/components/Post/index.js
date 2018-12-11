@@ -36,7 +36,7 @@ export default class Post extends Component {
                 onClick = { this._removePostHandler }
               />
             : null;
-    }
+    };
 
     render() {
         const { comment, created, _likePost, id, likes, avatar, firstName, lastName} = this.props;

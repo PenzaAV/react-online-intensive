@@ -1,5 +1,7 @@
 // Core
 import React, {Component} from 'react';
+import { Transition } from 'react-transition-group';
+import { fromTo } from 'gsap';
 
 // Components
 import { withProfile } from '../HOC/withProfile';
@@ -157,12 +159,11 @@ export default class Feed extends Component {
 
     render() {
         const {posts, isSpinning} = this.state;
-        console.log(posts);
+
         const postsJSX = posts.map((post) => {
             return (
-                <Catcher>
+                <Catcher key = { post.id } >
                     <Post
-                        key = { post.id }
                         { ...post }
                         _likePost = { this._likePost }
                         _removePost = { this._removePost }
@@ -175,7 +176,14 @@ export default class Feed extends Component {
             <section className = { Styles.feed }>
                 <Spinner isSpinning = { isSpinning }/>
                 <StatusBar/>
-                <Composer _createPost = { this._createPost }/>
+                <Transition
+                    appear
+                    in
+                    timeout = { 1000 }
+                    onEnter = { this._animateComposerEnter }>
+                    <Composer _createPost = { this._createPost }/>
+                </Transition>
+                <Postman/>
                 {postsJSX}
             </section>
         );
