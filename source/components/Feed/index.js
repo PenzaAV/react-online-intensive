@@ -10,6 +10,7 @@ import Catcher from '../Catcher';
 import Composer from '../Composer';
 import Post from '../Post';
 import Spinner from '../Spinner';
+import Postman from '../Postman';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -157,6 +158,14 @@ export default class Feed extends Component {
         }));
     };
 
+    _animatePostmanEnter = (postman) => {
+        fromTo(postman, 1, {right: -280}, {right: 30});
+    };
+
+    _animatePostmanEntered = (postman) => {
+        fromTo(postman, 1, {right: 30}, {right: -280});
+    };
+
     render() {
         const {posts, isSpinning} = this.state;
 
@@ -179,11 +188,17 @@ export default class Feed extends Component {
                 <Transition
                     appear
                     in
-                    timeout = { 1000 }
-                    onEnter = { this._animateComposerEnter }>
+                    timeout = { 1000 }>
                     <Composer _createPost = { this._createPost }/>
                 </Transition>
-                <Postman/>
+                <Transition
+                    appear
+                    in
+                    timeout = { 4000 }
+                    onEnter = { this._animatePostmanEnter }
+                    onEntered = { this._animatePostmanEntered }>
+                    <Postman/>
+                </Transition>
                 {postsJSX}
             </section>
         );
