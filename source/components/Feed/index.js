@@ -162,6 +162,14 @@ export default class Feed extends Component {
         }));
     };
 
+    _animatePostmanEnter = (postman) => {
+        fromTo(postman, 1, {right: -280}, {right: 30});
+    };
+
+    _animatePostmanEntered = (postman) => {
+        fromTo(postman, 1, {right: 30}, {right: -280});
+    };
+
     render() {
         const {posts, isSpinning} = this.state;
 
@@ -201,7 +209,14 @@ export default class Feed extends Component {
                     onEnter = { this._animateComposerEnter }>
                     <Composer _createPost = { this._createPost }/>
                 </Transition>
-                <Postman/>
+                <Transition
+                    appear
+                    in
+                    timeout = { 4000 }
+                    onEnter = { this._animatePostmanEnter }
+                    onEntered = { this._animatePostmanEntered }>
+                    <Postman/>
+                </Transition>
                 <TransitionGroup>
                     {postsJSX}
                 </TransitionGroup>
