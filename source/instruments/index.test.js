@@ -30,7 +30,7 @@ describe('instruments:', () => {
         expect(() => getUniqueID('привет')).toThrow();
     });
 
-    test('getUniqueID function should produse a string of a desired given length', () => {
+    test('getUniqueID function should produce a string of a desired given length', () => {
         expect(typeof getUniqueID()).toBe('string');
         expect(getUniqueID(5)).toHaveLength(5);
         expect(getUniqueID(13)).toHaveLength(13);

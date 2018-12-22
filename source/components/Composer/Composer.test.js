@@ -106,8 +106,8 @@ describe('composer component:', () => {
     });
 
     test('should have string props "avatar" and "currentUserFirstName"', () => {
-        expect(typeof props.avatar).toBe('string');
-        expect(typeof props.currentUserFirstName).toBe('string');
+        expect(typeof result.props().avatar).toBe('string');
+        expect(typeof result.props().currentUserFirstName).toBe('string');
     });
 
     test('method _submitOnEnter should be exist', () => {
