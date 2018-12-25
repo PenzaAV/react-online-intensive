@@ -47,20 +47,14 @@ export default class App extends Component {
         this.setState({
             isLoggedIn: true,
         });
-        localStorage.setItem('isLoggedIn', this.state.isLoggedIn);
+        localStorage.setItem('isLoggedIn', 'true');
     };
 
     _LoggedInStorage = () => {
         const LoggedInStorage = localStorage.getItem('isLoggedIn');
-        console.log(LoggedInStorage);
-
-        if (LoggedInStorage) {
+        if (LoggedInStorage === 'true') {
             this.setState({
                 isLoggedIn: true,
-            });
-        } else {
-            this.setState({
-                isLoggedIn: false,
             });
         }
     };
